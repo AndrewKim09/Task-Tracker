@@ -21,6 +21,20 @@
     }
   }
 
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track{
+    background-color: #2563eb;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb{
+    background-color: #18181b;
+    border-radius: 10px;
+  }
+
 html{
     background-color: #fde4be;
     font-family: 'Epilogue', sans-serif;
