@@ -14,7 +14,7 @@ export const GetTasks = () => {
     const getFormattedTasksData = (data) => {
         return data.docs.map((doc) => {
             return {
-                
+                id: doc.id,
                 title: doc.data().title,
                 details: doc.data().details,
                 date: doc.data().date.toDate().toLocaleDateString('en-US', {
@@ -39,10 +39,12 @@ export const GetTasks = () => {
     }
     
     useEffect(() => {
+        console.log(user)
         retrieveTasks();
     }, [user])
   return {
     loading,
-    tasksList
+    tasksList,
+    retrieveTasks
   }
 }

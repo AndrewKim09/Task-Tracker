@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { FaArrowLeft } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { DateTimePicker} from "@mui/x-date-pickers"
@@ -16,15 +16,7 @@ import { useForm } from "react-hook-form";
 export const Create = () => {
 const [selectedDate, setSelectedDate] = useState(null);
 const [user] = useAuthState(auth)
-
-const onSubmit = () => {
-    if((new Date()) < selectedDate.$d){
-        handleSubmit(onCreateTask)
-    }
-    else {
-        
-    }
-}
+const [dateError, setDateError] = useState("")
 
 const TaskSchema = yup.object().shape({
     
@@ -45,6 +37,7 @@ const {register, handleSubmit, formState: {errors}, setValue} = useForm({
 })
 
 const onCreateTask = async (data) => {
+    console.log("2")
     try {
         console.log("Data:", data); // Log the entire data object
         console.log("Selected Date:", selectedDate); // Log the selectedDate
@@ -74,16 +67,35 @@ const onCreateTask = async (data) => {
         });
 
         // After adding the document, reload the page
-        window.location.reload();
+        //window.location.reload();
     } catch (error) {
         console.error("Error:", error);
     }
 };
 
+const onSubmit = async (data, event) => {
+    event.preventDefault();
+    if(selectedDate && (new Date()) < selectedDate.$d){
+        console.log("2")
+        await handleSubmit((formData) => onCreateTask(formData))(data);
+
+    }
+    else {
+        console.log(selectedDate)
+        if(selectedDate == null){
+            setDateError("please enter a date")
+        }
+        else{
+            setDateError("You cant set a task for the past!")
+        }
+        
+    }
+}
+
 
   return (
     <div class = "w-[100%]">
-        <form onSubmit={onSubmit} class = "w-[100%] flex flex-col items-center ">
+        <form onSubmit={(event, data) => {onSubmit(data, event)}} class = "w-[100%] flex flex-col items-center ">
             <div class = "w-[100%] flex flex-col items-center">
 
                 <div class = 'w-[100%] flex items-start mt-[5px]'>
@@ -110,10 +122,10 @@ const onCreateTask = async (data) => {
             <div class = "flex flex-col w-[85%]">
                 <div class = 'flex'>
                     <label>Time</label>
-                    <p class = "ml-6 text-red-700">{errors.date?.message}</p>
+                    <p class = "ml-6 text-red-700">{dateError}</p>
                 </div>
 
-                    <DateTimePicker views={['year', 'month', 'day', 'hours', 'minutes']} onChange = {(date) => {setSelectedDate(date)}} selected = {selectedDate} />
+                    <DateTimePicker views={['year', 'month', 'day', 'hours', 'minutes']} onChange ={(date) => {setDateError(""); setSelectedDate(date)}} selected = {selectedDate} />
 
             </div>
 
