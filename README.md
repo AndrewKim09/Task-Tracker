@@ -1,5 +1,7 @@
 # thank you for checking out my website
-it is technically still a work in progress as i cant seem to get it to work on github pages even though it works when hosted locally. its a simple task tracker connected to a free firestarter database and uses the google authentication to login. Please enjoy and let me know if i can do anything to make it run or look better
+its a simple task tracker connected to a free firestarter database and uses the google authentication to login. Please enjoy and let me know if i can do anything to make it run or look better
+
+# https://andrewkim09.github.io/Task-Tracker/
 
 # Getting Started with Create React App
 
