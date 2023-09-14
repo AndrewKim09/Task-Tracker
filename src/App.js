@@ -23,7 +23,7 @@ function App() {
           <Router basename={process.env.REACT_APP_URI}>
             <Routes>
               <Route path = "/" element = {<Navigate to="/home-page"/>} />
-              <Route path = "/home-page" element = {user? <HomePage/>: <Navigate to= "/"/>}/>
+              <Route path = "/home-page" element = {<HomePage/>}/>
               <Route path = "/tasks" element = {user? <Tasks/>: <Navigate to= "/"/>}/>
               <Route path = "/create" element = {user? <Create/>: <Navigate to= "/"/>}/>
             </Routes>
@@ -35,7 +35,3 @@ function App() {
 }
 
 export default App;
-//q: when i deploy my app into github pages, it is blank when i am using tailwindcss and react
-//a: https://stackoverflow.com/questions/68724290/why-is-my-react-app-blank-when-deployed-to-github-pages
-
-
