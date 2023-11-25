@@ -3,7 +3,6 @@ import Typed from 'react-typed';
 import {FaStop} from 'react-icons/fa';
 import { auth, provider} from './firebase';
 import { signInWithPopup } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
 
 export const HomePage = () => {
   const navigate = useNavigate();

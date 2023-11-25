@@ -18,7 +18,6 @@ export const Create = () => {
 const [selectedDate, setSelectedDate] = useState(null);
 const [user] = useAuthState(auth)
 const [dateError, setDateError] = useState("")
-const navigate = useNavigate();
 
 const TaskSchema = yup.object().shape({
     
