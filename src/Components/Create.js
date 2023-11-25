@@ -13,10 +13,12 @@ import { useForm } from "react-hook-form";
 
 
 
+
 export const Create = () => {
 const [selectedDate, setSelectedDate] = useState(null);
 const [user] = useAuthState(auth)
 const [dateError, setDateError] = useState("")
+const navigate = useNavigate();
 
 const TaskSchema = yup.object().shape({
     
@@ -39,23 +41,12 @@ const {register, handleSubmit, formState: {errors}, setValue} = useForm({
 const onCreateTask = async (data) => {
     console.log("2")
     try {
-        console.log("Data:", data); // Log the entire data object
-        console.log("Selected Date:", selectedDate); // Log the selectedDate
 
-        // Check if selectedDate is a valid Date object and log it
+
         const dateTimeStamp = selectedDate ? new Date(selectedDate.$d) : null;
-        console.log("Timestamp:", dateTimeStamp);
-        console.log("type of java date", (typeof (new Date())));
-        console.log("type of datetimepicker date,", (typeof dateTimeStamp))
+
 
         const { title, details } = data;
-
-        // Log individual data properties
-        console.log("Title:", title);
-        console.log("Details:", details);
-
-        // Log the username
-        console.log("Username:", user?.displayName);
 
         // Add the document to Firestore
         await addDoc(postsRef, {
@@ -66,8 +57,7 @@ const onCreateTask = async (data) => {
             
         });
 
-        // After adding the document, reload the page
-        //window.location.reload();
+        window.location.reload();
     } catch (error) {
         console.error("Error:", error);
     }
